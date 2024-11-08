@@ -17,7 +17,6 @@ class OptionFactory extends Factory
           'title' => $this->faker->word(),
           'created_at' => Carbon::now(),
           'updated_at' => Carbon::now(),
-
           'poll_id' => Poll::factory(),
         ];
     }

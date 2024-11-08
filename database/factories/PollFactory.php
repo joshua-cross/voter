@@ -14,6 +14,8 @@ class PollFactory extends Factory
     {
         return [
           'title' => $this->faker->word,
+          'public' => $this->faker->boolean,
+          'expiry_date' => Carbon::now()->addDay(),
           'created_at' => Carbon::now(),
           'updated_at' => Carbon::now(),
         ];
