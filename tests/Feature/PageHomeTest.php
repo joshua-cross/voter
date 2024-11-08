@@ -2,109 +2,75 @@
 
 use App\Models\Option;
 use App\Models\Poll;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
+
 use function Pest\Laravel\get;
-use function PHPUnit\Framework\assertTrue;
 
 uses(RefreshDatabase::class);
 
 it('Shows Poll List', function () {
     // Arrange
-    $pollOne = Poll::factory()->create([
-        'title' => "Poll A",
-        'public' => true,
-    ]);
-    $options = Option::factory()->createMany([
-        [
-            'title' => "Poll A Option A",
-            'poll_id' => $pollOne->id
-        ],
-        [
-            'title' => "Poll A Option B",
-            'poll_id' => $pollOne->id
-        ],
-        [
-            'title' => "Poll A Option C",
-            'poll_id' => $pollOne->id
-        ]
-    ]);
-
-
-    $pollTwo = Poll::factory()->create([
-        'title' => 'Poll B',
-        'public' => true
-    ]);
-    $optionsTwo = Option::factory()->createMany([
-        [
-            'title' => 'Poll B Option A',
-            'poll_id' => $pollTwo->id
-        ]
-    ]);
-    Poll::factory()->create([
-        'title' => 'Poll C',
-        'public' => true
-    ]);
+    $pollOne = Poll::factory()->has(Option::factory()->count(3))->notExpired()->create();
+    $pollTwo = Poll::factory()->has(Option::factory()->count(1))->notExpired()->create();
+    $pollThree = Poll::factory()->notExpired()->create();
     // Act
 
     // Assert
     get(route('home'))
-        ->assertOk()
         ->assertSeeText([
-            'Poll A',
-            'Poll A Option A',
-            'Poll A Option B',
-            'Poll A Option C',
-            'Poll B',
-            'Poll B Option A',
-            'Poll C',
+            $pollOne->title,
+            $pollOne->options[0]->title,
+            $pollOne->options[1]->title,
+            $pollOne->options[2]->title,
+            $pollTwo->title,
+            $pollTwo->options[0]->title,
+            $pollThree->title,
         ]);
 });
 
 it('Shows only public polls', function () {
-    Poll::factory()->create(['title' => 'Poll A', 'public' => false]);
-    Poll::factory()->create(['title' => 'Poll B', 'public' => true]);
-    Poll::factory()->create(['title' => 'Poll C', 'public' => true]);
+    $firstPoll = Poll::factory()->private()->create();
+    $secondPoll = Poll::factory()->public()->create();
+    $lastPoll = Poll::factory()->public()->create();
 
     get(route('home'))
         ->assertSeeText([
-            'Poll B',
-            'Poll C'
+            $lastPoll->title,
+            $secondPoll->title,
         ])
         ->assertDontSeeText([
-            'Poll A'
+            $firstPoll->title,
         ]);
 });
 
 
 it('Shows only none-expired polls', function () {
-    $now = Carbon::now();
-    // 1 month in the future
-    Poll::factory()->create(['title' => "Poll A", 'public' => true, 'expiry_date' => $now->addMonth()]);
-    // 1 hour in the future
-    Poll::factory()->create(['title' => "Poll B", 'public' => true, 'expiry_date' => $now->addHour()]);
-    // in the past
-    Poll::factory()->create(['title' => 'Poll C', 'public' => true, 'expiry_date' => $now->subYear(2)]);
-
+    //Arrange
+    $firstPoll = Poll::factory()->notExpired()->create();
+    $secondPoll = Poll::factory()->notExpired()->create();
+    $lastPoll = Poll::factory()->expired()->create();
+    //Act
+    //Assert
     get(route('home'))
         ->assertSeeText([
-            'Poll A',
-            'Poll B'
+            $firstPoll->title,
+            $secondPoll->title,
         ])
         ->assertDontSeeText([
-            'Poll C'
+            $lastPoll->title,
         ]);
 });
 
 it('Shows polls in creation order', function () {
-    Poll::factory()->create(['title' => 'Poll A', 'public' => true, 'created_at' => Carbon::now()->subMonth()]);
-    Poll::factory()->create(['title' => 'Poll B', 'public' => true, 'created_at' => Carbon::now()->subDay()]);
-    Poll::factory()->create(['title' => 'Poll C', 'public' => true, 'created_at' => Carbon::now()->subMinute()]);
+    $firstPoll = Poll::factory()->create(['public' => true, 'created_at' => Carbon::now()->subMonth()]);
+    $secondPoll = Poll::factory()->create(['public' => true, 'created_at' => Carbon::now()->subDay()]);
+    $lastPoll = Poll::factory()->create(['public' => true, 'created_at' => Carbon::now()->subMinute()]);
 
     get(route('home'))
         ->assertSeeTextInOrder([
-            'Poll C',
-            'Poll B',
-            'Poll A'
+            $lastPoll->title,
+            $secondPoll->title,
+            $firstPoll->title,
         ]);
 });

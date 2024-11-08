@@ -13,11 +13,53 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-          'title' => $this->faker->word,
-          'public' => $this->faker->boolean,
-          'expiry_date' => Carbon::now()->addDay(),
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now(),
+            'title' => $this->faker->word,
+            'public' => $this->faker->boolean,
+            'expiry_date' => Carbon::now()->addDay(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
+    }
+
+    public function public(): self
+    {
+        return $this->state(
+            fn($attributes)
+                => [
+                'public' => true,
+            ],
+        );
+    }
+
+    public function private(): self
+    {
+        return $this->state(
+            fn($attributes)
+                => [
+                'public' => false,
+            ],
+        );
+    }
+
+    public function expired(?Carbon $date = null): self
+    {
+        return $this->state(
+            fn($attributes)
+                => [
+                'expiry_date' => $date ?? Carbon::yesterday(),
+                'public' => true,
+            ],
+        );
+    }
+
+    public function notExpired(?Carbon $date = null): self
+    {
+        return $this->state(
+            fn($attributes)
+                => [
+                'expiry_date' => $date ?? Carbon::tomorrow(),
+                'public' => true,
+            ],
+        );
     }
 }
