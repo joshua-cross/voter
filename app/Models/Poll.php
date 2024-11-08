@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -17,18 +19,26 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Option> $options
  * @property-read int|null $options_count
  * @method static \Database\Factories\PollFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll wherePublic($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Poll whereUpdatedAt($value)
+ * @method static Builder<static>|Poll newModelQuery()
+ * @method static Builder<static>|Poll newQuery()
+ * @method static Builder<static>|Poll query()
+ * @method static Builder<static>|Poll whereCreatedAt($value)
+ * @method static Builder<static>|Poll whereId($value)
+ * @method static Builder<static>|Poll wherePublic($value)
+ * @method static Builder<static>|Poll whereTitle($value)
+ * @method static Builder<static>|Poll whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Poll extends Model {
+class Poll extends Model
+{
     use HasFactory;
+
+    public static function scopeNotExpired(Builder $query): Builder
+    {
+        return $query
+            ->whereNotNull("expiry_date")
+            ->where("expiry_date", ">=", Carbon::now());
+    }
 
     public function options(): HasMany
     {
