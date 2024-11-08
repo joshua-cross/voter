@@ -7,15 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('polls', function (Blueprint $table) {
+        Schema::create('options', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->foreignId('poll_id');
             $table->timestamps();
-            $table->string("title");
+            $table->softDeletes();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('polls');
+        Schema::dropIfExists('options');
     }
 };
