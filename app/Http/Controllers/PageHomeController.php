@@ -9,7 +9,7 @@ class PageHomeController extends Controller
     public function __invoke()
     {
         $polls = Poll::where("public", true)
-            ->notExpired()
+            ->active()
             ->orderBy('created_at', 'desc')
             ->get();
 

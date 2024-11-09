@@ -33,7 +33,7 @@ class Poll extends Model
 {
     use HasFactory;
 
-    public static function scopeNotExpired(Builder $query): Builder
+    public static function scopeActive(Builder $query): Builder
     {
         return $query
             ->whereNotNull("expiry_date")
