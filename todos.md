@@ -1,6 +1,12 @@
 ## Homepage
 
 * List of public polls
+* Option to order by date, popularity, ending soon.
+
+# Previous Polls
+
+* Date ending ASC and DESC
+* Only show polls that have previously expired.
 
 ## Guests Can:
 
