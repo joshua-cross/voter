@@ -31,12 +31,15 @@ it('Shows Poll List', function () {
             $pollOne->title,
             $pollOne->user->name,
             $pollOne->formattedExpiryDate(),
+            $pollOne->responseCount()."Responses",
             $pollTwo->title,
             $pollTwo->formattedExpiryDate(),
             $pollTwo->user->name,
+            $pollTwo->responseCount()."Responses",
             $pollThree->formattedExpiryDate(),
             $pollThree->user->name,
             $pollThree->expiry_date,
+            $pollThree->responseCount()."Responses",
         ])
         // having to do like this as truncation messes up test but truncation is expected behaviour
         ->assertSeeHtml([

@@ -21,6 +21,9 @@ it('Displays Poll data on poll details page', function () {
         ->assertSeeText([
             $poll->title,
             $poll->description,
+            $poll->responseCount()."Responses",
+            $poll->user->name,
+            $poll->expiry_date,
             $poll->options[0]->title,
             $poll->options[1]->title,
         ]);

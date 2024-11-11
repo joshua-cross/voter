@@ -53,6 +53,17 @@ class Poll extends Model
         return $carbon->format('Y-m-d H:i:s');
     }
 
+    public function responseCount(): int
+    {
+        $options = $this->options;
+        $responseCount = 0;
+        foreach ($options as $option) {
+            $responses = $option->responses;
+            $responseCount = count($responses);
+        }
+        return $responseCount;
+    }
+
     public function options(): HasMany
     {
         return $this->hasMany(Option::class);

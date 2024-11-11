@@ -21,3 +21,14 @@ it('gives a successful response back for the poll details page', function () {
     get(route("poll", $poll->id))
         ->assertOk();
 });
+
+it('gives a successful response for the user details page', function () {
+    $user = User::factory()->create();
+    // Arrange
+
+    // Act
+
+    // Assert
+    get(route("user", $user->id))
+        ->assertOk();
+});

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -39,5 +40,10 @@ class Option extends Model
     public function poll(): BelongsTo
     {
         return $this->belongsTo(Poll::class);
+    }
+
+    public function responses(): HasMany
+    {
+        return $this->hasMany(Response::class);
     }
 }

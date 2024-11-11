@@ -16,10 +16,12 @@
                                 </div>
                             </div>
                             <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                                <p class="text-sm/6 text-gray-900">{{ $poll->user->name }}</p>
+                                <a href="{{ route("user", $poll->user->id) }}"
+                                   class="text-sm/6 text-gray-900">{{ $poll->user->name }}</a>
                                 <p class="mt-1 text-xs/5 text-gray-500">Expires:
                                     <time datetime="2023-01-23T13:23Z">{{ $poll->formattedExpiryDate() }}</time>
                                 </p>
+                                <p></p>
                             </div>
                         </a>
                     </li>
