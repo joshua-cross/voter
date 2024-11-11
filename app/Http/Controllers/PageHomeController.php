@@ -13,6 +13,9 @@ class PageHomeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('welcome', compact('polls'));
+        return view('welcome', [
+            'polls' => $polls,
+            "loggedIn" => (bool) auth()->user(),
+        ]);
     }
 }

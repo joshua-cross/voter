@@ -49,6 +49,16 @@ it('Shows Poll List', function () {
         ]);
 });
 
+it('Shows login button on homepage when not logged in', function () {
+    get(route("home"))
+        ->assertSeeText("Login");
+});
+
+it('Shows logout button on homepage when logged in', function () {
+    get(route("home"))
+        ->assertSeeText("Logout");
+});
+
 it('Shows no results found if no active polls are found', function () {
     get(route('home'))
         ->assertSeeText("No Results are found")
