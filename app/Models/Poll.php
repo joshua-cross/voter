@@ -50,7 +50,7 @@ class Poll extends Model
     public function formattedExpiryDate(): string
     {
         $carbon = new Carbon($this->expiry_date);
-        return $carbon->format('Y-m-d h:m:s');
+        return $carbon->format('Y-m-d H:i:s');
     }
 
     public function options(): HasMany
