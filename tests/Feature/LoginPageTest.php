@@ -2,10 +2,15 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function Pest\Laravel\get;
+
 uses(RefreshDatabase::class);
 
-test('', function () {
-    $response = $this->get('/');
-
-    $response->assertStatus(200);
+it('Show Login form when not logged in', function () {
+    get(route('login'))
+        ->assertSeeText([
+            "Email Address",
+            "Password",
+            "Login"
+        ]);
 });
