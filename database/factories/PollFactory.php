@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Poll;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -13,9 +14,10 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word,
+            'title' => $this->faker->unique()->word,
             'public' => $this->faker->boolean,
             'description' => $this->faker->paragraph,
+            'user_id' => $this->faker->numberBetween(1, User::count()),
             'expiry_date' => Carbon::now()->addDay(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

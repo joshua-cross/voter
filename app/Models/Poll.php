@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -33,6 +34,12 @@ class Poll extends Model
 {
     use HasFactory;
 
+    public static function scopePublic(Builder $query): Builder
+    {
+        return $query
+            ->where('public', "=", 1);
+    }
+
     public static function scopeActive(Builder $query): Builder
     {
         return $query
@@ -40,8 +47,19 @@ class Poll extends Model
             ->where("expiry_date", ">=", Carbon::now());
     }
 
+    public function formattedExpiryDate(): string
+    {
+        $carbon = new Carbon($this->expiry_date);
+        return $carbon->format('Y-m-d h:m:s');
+    }
+
     public function options(): HasMany
     {
         return $this->hasMany(Option::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

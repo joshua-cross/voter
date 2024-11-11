@@ -2,6 +2,7 @@
 
 * List of public polls
 * Option to order by date, popularity, ending soon.
+* New tag if a poll has only just been created: within last 5 mins
 
 # Previous Polls
 

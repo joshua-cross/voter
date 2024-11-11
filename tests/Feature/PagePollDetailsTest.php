@@ -2,6 +2,7 @@
 
 use App\Models\Option;
 use App\Models\Poll;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use function Pest\Laravel\get;
@@ -10,6 +11,7 @@ use function PHPUnit\Framework\assertCount;
 uses(RefreshDatabase::class);
 
 it('Displays Poll data on poll details page', function () {
+    User::factory()->create();
     // Arrange
     $poll = Poll::factory()->has(Option::factory()->count(2), 'options')->notExpired()->create();
     // Act
