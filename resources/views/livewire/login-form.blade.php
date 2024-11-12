@@ -31,6 +31,11 @@
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
+    @if($errors)
+        @foreach($errors->all() as $error)
+            <p class="text-xs text-red-500 mt-1">{{ $error }}</p>
+        @endforeach
+    @endif
     <div class="mt-2.5">
         <button href="http://127.0.0.1:8000/login"
                 type="submit"

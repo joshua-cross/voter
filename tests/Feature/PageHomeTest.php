@@ -56,6 +56,8 @@ it('Shows login button on homepage when not logged in', function () {
 });
 
 it('Shows logout button on homepage when logged in', function () {
+    $user = User::factory()->create();
+    Auth::login($user);
     get(route("home"))
         ->assertSeeText("Logout")
         ->assertSee(route("logout"));
