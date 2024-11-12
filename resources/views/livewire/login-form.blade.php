@@ -1,4 +1,5 @@
-<form class="mx-auto mt-20 max-w-lg px-2 sm:px-6 lg:px-8" method="post" wire:submit="form.login">
+<form class="mx-auto mt-20 max-w-lg px-2 sm:px-6 lg:px-8" method="post" action="{{ route("login") }}">
+    @csrf
     <h1 class="text-2xl mb-5 font-medium">Login</h1>
     <div>
         <label for="price" class="block text-sm/6 font-medium text-gray-900">Email Address</label>
