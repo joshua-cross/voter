@@ -37,7 +37,7 @@ test('Login should fail with the incorrect details', function () {
     });
 });
 
-test("Errors should appear when you enter invalid emails/password", function () {
+test("Errors should appear when you enter invalid email", function () {
     $user = User::factory()->create([
         'email' => 'taylor@laravel.com',
     ]);
@@ -45,9 +45,8 @@ test("Errors should appear when you enter invalid emails/password", function () 
     $this->browse(function (Browser $browser) use ($user) {
         $browser
             ->visit(route("login"))
-            ->type("email", $user->email)
-            ->type("password", "wrong-password")
-            ->typeSlowly('password', '')
-            ->assertSee("invalid");
+            ->typeSlowly("email", "test")
+            ->waitFor(".text-xs.text-red-500.mt-1", 1)
+            ->assertSee("Please enter a valid email address");
     });
 });

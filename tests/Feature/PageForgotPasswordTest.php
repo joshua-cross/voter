@@ -14,7 +14,7 @@ it("Redirects to the homepage if the user is logged in", function () {
         ->assertStatus(302);
 });
 
-it('SHows the forgot password form if the user is not logged in', function () {
+it('Shows the forgot password form if the user is not logged in', function () {
     get("/forgot-password")
         ->assertSeeText("Forgot Password?");
 });
