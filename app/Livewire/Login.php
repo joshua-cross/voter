@@ -2,11 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\LoginForm;
 use Livewire\Component;
 
-class LoginForm extends Component
+class Login extends Component
 {
-    public Forms\LoginForm $form;
+    public LoginForm $form;
 
     public function render()
     {

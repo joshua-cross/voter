@@ -36,3 +36,18 @@ test('Login should fail with the incorrect details', function () {
             ->assertSee("These credentials do not match our records.");
     });
 });
+
+test("Errors should appear when you enter invalid emails/password", function () {
+    $user = User::factory()->create([
+        'email' => 'taylor@laravel.com',
+    ]);
+
+    $this->browse(function (Browser $browser) use ($user) {
+        $browser
+            ->visit(route("login"))
+            ->type("email", $user->email)
+            ->type("password", "wrong-password")
+            ->typeSlowly('password', '')
+            ->assertSee("invalid");
+    });
+});

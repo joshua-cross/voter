@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             "name" => "joshua cross",
             "email" => "josh@class-creative.com",
-            "password" => Hash::make("classcreative25"),
+            "password" => Hash::make(env("SEED_PASSWORD") ?? "password"),
         ]);
         User::factory(10)->create();
         $this->call(PollSeeder::class);

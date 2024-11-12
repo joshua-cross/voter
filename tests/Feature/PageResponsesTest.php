@@ -38,3 +38,8 @@ test('Gives a successful response for the registration page', function () {
     get(route('registration'))
         ->assertOk();
 });
+
+test('Gives a successful response for the forgot password page', function () {
+    get(route('forgot-password'))
+        ->assertOk();
+});

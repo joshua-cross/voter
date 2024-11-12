@@ -2,5 +2,5 @@
     <x-slot:title>
         Login
     </x-slot:title>
-    <livewire:login-form/>
+    <livewire:login/>
 </x-layout>

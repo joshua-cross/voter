@@ -1,4 +1,5 @@
-<form class="mx-auto mt-20 max-w-lg px-2 sm:px-6 lg:px-8" method="post" action="{{ route("login") }}">
+<form class="mx-auto mt-20 max-w-lg px-2 sm:px-6 lg:px-8" method="post"
+      action="{{ route("login") }}">
     @csrf
     <h1 class="text-2xl mb-5 font-medium">Login</h1>
     <div>
@@ -27,15 +28,14 @@
                 class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
             >
         </div>
+        <a href="/forgot-password">Forgot Password?</a>
         @error('form.password')
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
-    @if($errors)
-        @foreach($errors->all() as $error)
-            <p class="text-xs text-red-500 mt-1">{{ $error }}</p>
-        @endforeach
-    @endif
+    @error('email')
+    <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+    @enderror
     <div class="mt-2.5">
         <button href="http://127.0.0.1:8000/login"
                 type="submit"
