@@ -35,7 +35,7 @@ it('gives a successful response for the user details page', function () {
 
 
 test('Gives a successful response for the registration page', function () {
-    get(route('registration'))
+    get(route('register'))
         ->assertOk();
 });
 
