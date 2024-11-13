@@ -15,8 +15,8 @@ test('Register with correct details', function () {
             ->visit(route("register"))
             ->type('name', "josh")
             ->type('email', "crossjoshua6@gmail.com")
-            ->type('password', "password")
-            ->type('password_confirmation', "password")
+            ->type('password', "Password123!")
+            ->type('password_confirmation', "Password123!")
             ->press('Register');
 
         $user = User::where("email", "crossjoshua6@gmail.com")->first();
@@ -34,5 +34,22 @@ test('Register with missing fields', function () {
 
         $user = User::where("email", "crossjoshua6@gmail.com")->first();
         assertEmpty($user);
+    });
+});
+
+test("Can login after succesfully registering", function () {
+    $this->browse(function (Browser $browser) {
+        $browser
+            ->visit(route("register"))
+            ->type('name', "josh")
+            ->type('email', "crossjoshua6@gmail.com")
+            ->type('password', "Password123!")
+            ->type('password_confirmation', "Password123!")
+            ->press('Register')
+            ->visit("/login")
+            ->type('email', "crossjoshua6@gmail.com")
+            ->type('password', "Password123!")
+            ->press('Login')
+            ->assertRouteIs('home');
     });
 });
