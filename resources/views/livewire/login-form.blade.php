@@ -36,10 +36,11 @@
     @error('email')
     <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
     @enderror
-    <div class="mt-2.5">
+    <div class="mt-2.5 flex items-center gap-5 justify-start">
         <button href="http://127.0.0.1:8000/login"
                 type="submit"
                 class="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white" aria-current="page">Login
         </button>
+        <a class="text-blue-400 text-sm hover:underline" href="{{ route('register') }}">Or Register</a>
     </div>
 </form>
