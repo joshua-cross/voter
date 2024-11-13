@@ -17,7 +17,7 @@
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
-    <div>
+    <div class="mt-2">
         <label for="email" class="block text-sm/6 font-medium text-gray-900">Email Address</label>
         <div class="relative mt-1 rounded-md shadow-sm">
             <input
@@ -32,7 +32,7 @@
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
-    <div>
+    <div class="mt-2">
         <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
         <div class="relative mt-1 rounded-md shadow-sm">
             <input
@@ -47,7 +47,7 @@
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
         @enderror
     </div>
-    <div>
+    <div class="mt-2">
         <label for="password-confirmation" class="block text-sm/6 font-medium text-gray-900">Confirm Password</label>
         <div class="relative mt-1 rounded-md shadow-sm">
             <input
@@ -60,6 +60,17 @@
         </div>
         @error('form.password_confirmation')
         <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+        @enderror
+        @if($errors && $errors->get("password"))
+            @if(is_array($errors->get("password")))
+                @foreach($errors->get("password") as $error)
+                    <p class="text-xs text-red-500 mt-1">{{ $error }}</p>
+                @endforeach
+            @else
+                <p class="text-xs text-red-500 mt-1">{{ $errors->get("password") }}</p>
+            @endif
+        @endif
+        @error('password')
         @enderror
     </div>
     <div class="mt-2.5 flex items-center gap-5 justify-start">
