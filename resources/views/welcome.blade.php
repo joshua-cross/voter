@@ -12,6 +12,7 @@
                 @endforeach
             </ul>
         </div>
+        {{ $polls->links() }}
     @else
         <h1>No Results are found</h1>
     @endif

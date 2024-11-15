@@ -31,21 +31,34 @@ it('Shows Poll List', function () {
             $pollOne->title,
             $pollOne->user->name,
             $pollOne->formattedExpiryDate(),
-            $pollOne->responseCount()."Responses",
+            $pollOne->responseCount()." Responses",
             $pollTwo->title,
             $pollTwo->formattedExpiryDate(),
             $pollTwo->user->name,
-            $pollTwo->responseCount()."Responses",
+            $pollTwo->responseCount()." Responses",
             $pollThree->formattedExpiryDate(),
             $pollThree->user->name,
             $pollThree->expiry_date,
-            $pollThree->responseCount()."Responses",
+            $pollThree->responseCount()." Responses",
         ])
         // having to do like this as truncation messes up test but truncation is expected behaviour
         ->assertSeeHtml([
             '<p class="mt-1 truncate text-xs/5 text-gray-500">'.$pollOne->description.'</p>',
             '<p class="mt-1 truncate text-xs/5 text-gray-500">'.$pollTwo->description.'</p>',
             '<p class="mt-1 truncate text-xs/5 text-gray-500">'.$pollThree->description.'</p>',
+        ]);
+});
+
+it('Shows a maximum of 10 polls per page', function () {
+    User::factory()->create();
+    $polls = Poll::factory(13)->notExpired()->create();
+
+
+    get(route('home'))
+        ->assertDontSeeText([
+            $polls[10]->title,
+            $polls[11]->title,
+            $polls[12]->title,
         ]);
 });
 
