@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    color: theme('colors.text');
+}
+
+.btn {
+    background: theme('colors.primary');
+    color: theme('colors.white');
+}
+
+a {
+    color: theme('colors.secondary.light');
+
+    &:hover {
+        text-decoration: underline;
+    }
+}

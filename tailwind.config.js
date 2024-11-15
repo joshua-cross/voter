@@ -15,6 +15,16 @@ export default {
             fontFamily: {
                 sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'background': "#f2f5e5",
+                'text': "#082b46",
+                "primary": "#e74184",
+                "secondary": {
+                    "light": "#13b0ee",
+                    DEFAULT: "#0c759e",
+                    "dark": "#095c7c",
+                },
+            }
         },
     },
     plugins: [],

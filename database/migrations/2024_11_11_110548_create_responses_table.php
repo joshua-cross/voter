@@ -11,8 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->softDeletes();
-            $table->bigInteger("opportunity_id");
-            $table->foreign("opportunity_id")->references("id")->on("opportunities");
+            $table->bigInteger("option_id");
+            $table->foreign("option_id")->references("id")->on("options");
         });
     }
 
