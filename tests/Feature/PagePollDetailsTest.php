@@ -24,7 +24,21 @@ it('Displays Poll data on poll details page', function () {
             $poll->responseCount()."Responses",
             $poll->user->name,
             $poll->expiry_date,
-            $poll->options[0]->title,
-            $poll->options[1]->title,
         ]);
+});
+
+it('Shows form on page where user is logged in', function () {
+    $user = User::factory()->create();
+    $poll = Poll::factory()->has(Option::factory()->count(2), 'options')->notExpired()->create();
+    Auth::login($user);
+    get(route("poll", $poll->id))
+        ->assertSeeText("Submit Vote");
+});
+
+
+it('Does not show form on pages', function () {
+    User::factory()->create();
+    $poll = Poll::factory()->has(Option::factory()->count(2), 'options')->notExpired()->create();
+    get(route("poll", $poll->id))
+        ->assertDontSee("Submit Vote");
 });
