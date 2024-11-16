@@ -23,18 +23,23 @@
             </div>
         </div>
         @auth
-            <form class="border border-gray-400 p-6 shadow-md bg-white mt-6" action="{{ route("submit-response") }}"
+            <form class="border rounded-md border-gray-400 p-6 shadow-md bg-white mt-6"
+                  action="{{ route("submit-response") }}"
                   method="post">
                 @csrf
                 <input type="hidden" name="user" value="{{ auth()->user()->id }}">
-                <div>
+                <div class="flex flex-col gap-1">
                     @foreach($poll->options as $option)
                         <div>
-                            <input type="radio" name="option" id="option-{{ $option->id }}" value="{{ $option->id }}">
+                            <input type="radio" name="option"
+                                   class="appearance-none hidden"
+                                   id="option-{{ $option->id }}"
+                                   value="{{ $option->id }}">
                             <label for="option-{{ $option->id }}">{{ $option->title }}</label>
                         </div>
                     @endforeach
-                    <button class="rounded-md btn px-3 py-2 text-sm font-medium text-white" type="submit">Submit Vote
+                    <button class="rounded-md mt-3 btn px-3 py-2 text-sm font-medium text-white" type="submit">Submit
+                        Vote
                     </button>
                 </div>
             </form>
