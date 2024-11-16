@@ -14,7 +14,7 @@ class PollSeeder extends Seeder
         Poll::factory(10)->expired()->create();
         Poll::factory(10)->has(Option::factory()->has(Response::factory(rand(0, 20)))->count(rand(2, 10)),
             'options')->private()->create();
-        Poll::factory(40)->has(Option::factory()->has(Response::factory(rand(0, 20)))->count(rand(2, 10)),
+        Poll::factory(150)->has(Option::factory()->has(Response::factory(rand(0, 20)))->count(rand(2, 10)),
             'options')->notExpired()->create();
     }
 }

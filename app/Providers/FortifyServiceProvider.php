@@ -23,7 +23,7 @@ class FortifyServiceProvider extends ServiceProvider
         //
     }
 
-    /**
+    /**tsc 
      * Bootstrap any application services.
      */
     public function boot(): void

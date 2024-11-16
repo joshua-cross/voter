@@ -12,7 +12,9 @@
                 @endforeach
             </ul>
         </div>
-        {{ $polls->links() }}
+    <div class="mt-6">
+        {{ $polls->onEachSide(1)->links() }}
+    </div>
     @else
         <h1>No Results are found</h1>
     @endif

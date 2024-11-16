@@ -24,7 +24,7 @@ export default {
                     DEFAULT: "#0c759e",
                     "dark": "#095c7c",
                 },
-            }
+            },
         },
     },
     plugins: [],
