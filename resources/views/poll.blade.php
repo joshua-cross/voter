@@ -31,7 +31,7 @@
                 <div class="flex flex-col gap-1">
                     @foreach($poll->options as $option)
                         <div>
-                            <input type="radio" name="option"
+                            <input type="radio" name="option_id"
                                    class="appearance-none hidden"
                                    id="option-{{ $option->id }}"
                                    value="{{ $option->id }}">

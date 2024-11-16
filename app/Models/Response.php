@@ -9,4 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Response extends Model
 {
     use SoftDeletes, HasFactory;
+
+    protected $fillable = ["user_id", "option_id"];
 }
