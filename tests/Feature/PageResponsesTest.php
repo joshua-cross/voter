@@ -43,3 +43,9 @@ test('Gives a successful response for the forgot password page', function () {
     get(route('forgot-password'))
         ->assertOk();
 });
+
+test('Gives a successful response for the poll results page', function () {
+    $poll = Poll::factory()->notExpired()->create();
+    get(route('results', $poll->id))
+        ->assertOk();
+});

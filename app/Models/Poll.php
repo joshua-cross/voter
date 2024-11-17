@@ -73,4 +73,9 @@ class Poll extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function isExpired(): bool
+    {
+        return Carbon::now() > new Carbon($this->expiry_date);
+    }
 }

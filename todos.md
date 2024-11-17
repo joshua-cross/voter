@@ -32,6 +32,7 @@
         * Private can only be accessed via inaccessible link
         * Public can be found in a 'discover'
     * Sponsored polls
+    * Place folder into a new "Folder" which display per user, only displays for the creator per creator
 * View past polls they voted in
 * View past polls they created
 * Can delete there polls so they are inaccessible
