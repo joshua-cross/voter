@@ -1,6 +1,8 @@
 <x-layout>
     <x-slot:title>Results - {{ $poll->title }}</x-slot:title>
     <div class="mx-auto mt-10 max-w-7xl px-2 sm:px-6 lg:px-8">
+        <x-poll-details :poll="$poll"/>
+        <x-share-menu/>
         <div class="border rounded-md border-gray-400 p-6 shadow-md bg-white mt-6">
             <ul class="bg-gray-800 w-full rounded-md shadow-md p-4 inline-flex flex-col gap-3.5">
                 @foreach($poll->options as $i => $option)
