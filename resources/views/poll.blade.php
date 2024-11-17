@@ -25,6 +25,7 @@
                 </p>
             </div>
         </div>
+        <x-share-menu/>
         @auth
             <form class="border rounded-md border-gray-400 p-6 shadow-md bg-white mt-6"
                   action="{{ route("submit-response") }}"
@@ -46,6 +47,16 @@
                     </button>
                 </div>
             </form>
+        @else
+            <div class="border rounded-md border-gray-400 p-6 shadow-md bg-white mt-6">
+                <h2 class="text-xl font-bold">Not Registered?</h2>
+                <p class="mt-2 text-sm">You require an account with Voter in order to vote on this poll.</p>
+                <div class="mt-2.5 flex items-center gap-5 justify-start">
+                    <a href="{{ route('register') }}"
+                       class="rounded-md btn px-3 py-2 text-sm font-medium text-white">Register</a>
+                    <a class="text-blue-400 text-sm hover:underline" href="{{ route('login') }}">Or Login</a>
+                </div>
+            </div>
         @endauth
     </div>
 </x-layout>

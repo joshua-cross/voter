@@ -40,5 +40,6 @@ it('Does not show form on pages', function () {
     User::factory()->create();
     $poll = Poll::factory()->has(Option::factory()->count(2), 'options')->notExpired()->create();
     get(route("poll", $poll->id))
+        ->assertSeeText(['Not Registered?'])
         ->assertDontSee("Submit Vote");
 });
