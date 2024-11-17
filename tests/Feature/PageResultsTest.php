@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Option;
 use App\Models\Poll;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -42,5 +43,24 @@ it('Does not show vote button if the user is logged in but the poll has expired'
             'Not yet voted?',
             'Click here to vote',
             'Register'
+        ]);
+});
+
+
+it('Shows the correct data for each option', function () {
+    User::factory()->create();
+    $poll = Poll::factory()->has(Option::factory()->count(5), 'options')->create();
+    get(route("results", $poll->id))
+        ->assertSeeText([
+            $poll->options[0]->title,
+            count($poll->options[0]->responses),
+            $poll->options[1]->title,
+            count($poll->options[1]->responses),
+            $poll->options[2]->title,
+            count($poll->options[2]->responses),
+            $poll->options[3]->title,
+            count($poll->options[3]->responses),
+            $poll->options[4]->title,
+            count($poll->options[4]->responses),
         ]);
 });
