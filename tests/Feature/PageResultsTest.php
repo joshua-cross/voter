@@ -54,13 +54,18 @@ it('Shows the correct data for each option', function () {
         ->assertSeeText([
             $poll->options[0]->title,
             count($poll->options[0]->responses),
+            $poll->options[0]->percentageOfVotes()."%",
             $poll->options[1]->title,
             count($poll->options[1]->responses),
+            $poll->options[0]->percentageOfVotes()."%",
             $poll->options[2]->title,
             count($poll->options[2]->responses),
+            $poll->options[0]->percentageOfVotes()."%",
             $poll->options[3]->title,
             count($poll->options[3]->responses),
+            $poll->options[0]->percentageOfVotes()."%",
             $poll->options[4]->title,
             count($poll->options[4]->responses),
+            $poll->options[0]->percentageOfVotes()."%",
         ]);
 });

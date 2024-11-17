@@ -46,4 +46,20 @@ class Option extends Model
     {
         return $this->hasMany(Response::class);
     }
+
+    public function percentageOfVotes(): float
+    {
+        $option = $this;
+        if (count($option->responses) === 0) {
+            return 0;
+        }
+
+        $poll = $option->poll;
+        $allResponsesCount = 0;
+        foreach ($poll->options as $theOption) {
+            $allResponsesCount += $theOption->responses->count();
+        }
+
+        return round((count($option->responses) / $allResponsesCount) * 100, 2);
+    }
 }
