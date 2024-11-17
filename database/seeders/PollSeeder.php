@@ -13,9 +13,15 @@ class PollSeeder extends Seeder
     public function run(): void
     {
         Poll::factory(5)->expired()->create();
-        Poll::factory(5)->has(Option::factory()->has(Response::factory(rand(0, 20))->withUser(User::factory()->create()))->count(rand(2, 10)),
-            'options')->private()->create();
-        Poll::factory(20)->has(Option::factory()->has(Response::factory(rand(0, 20))->withUser(User::factory()->create()))->count(rand(2, 10)),
-            'options')->notExpired()->create();
+        Poll::factory(5)->private()->create();
+        Poll::factory(20)->notExpired()->create()->each(fn(Poll $poll) => $this->optionGenerator($poll));
+    }
+
+    public function optionGenerator(Poll $poll): void
+    {
+        $options = Option::factory(rand(2, 10))->create([
+            'poll_id' => $poll->id,
+        ])->each(fn(Option $option) => Response::factory(rand(1,
+            15))->withOption($option)->withUser(User::factory()->create())->create());
     }
 }

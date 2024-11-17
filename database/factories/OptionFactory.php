@@ -14,10 +14,10 @@ class OptionFactory extends Factory
     public function definition(): array
     {
         return [
-          'title' => $this->faker->word(),
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now(),
-          'poll_id' => Poll::factory(),
+            'title' => $this->faker->word(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'poll_id' => Poll::factory(),
         ];
     }
 }

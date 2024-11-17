@@ -6,12 +6,12 @@
                 @foreach($poll->options as $i => $option)
                     <li class="flex items-center text-white">
                         <div class="w-1/6">
-                            <span class="block font-medium">{{ $option->title }}</span>
-                            <span class="block text-xs">{{ count($option->responses) }}</span>
+                            <span class="block font-bold">{{ $option->title }}</span>
+                            <span class="block text-xs font-medium">{{ count($option->responses) }}</span>
                         </div>
                         <div class="w-5/6">
                             <div style="width: {{ ceil($option->percentageOfVotes()) }}%"
-                                 class="bg-chart-{{ $i + 1 }} inline-flex justify-end py-1 px-2 rounded-md">
+                                 class="bg-chart-{{ $i + 1 }} min-w-16 inline-flex justify-end py-1 px-2 rounded-md">
                                 <span class="text-sm font-bold text-text">{{ $option->percentageOfVotes() }}%</span>
                             </div>
                         </div>
