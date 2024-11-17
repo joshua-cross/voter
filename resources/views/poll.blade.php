@@ -19,7 +19,10 @@
             </div>
             <div>
                 <p class="font-medium">Author</p>
-                <p class="mt-1 text-text-light text-sm">{{ $poll->user->name }}</p>
+                <p class="mt-1 text-text-light text-sm">
+                    <a href="{{ route("user", $poll->user->id) }}"
+                       class="text-sm/6 ">{{ $poll->user->name }}</a>
+                </p>
             </div>
         </div>
         @auth
