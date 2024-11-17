@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Option;
 use App\Models\Response;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,10 +23,16 @@ class ResponseFactory extends Factory
     public function withUser(User $user): self
     {
         return $this->state(
-            fn (array $attributes) =>
-                [
-                    "user_id" => $user->id,
-                ]
+            fn(array $attributes) => [
+                "user_id" => $user->id,
+            ]
         );
+    }
+
+    public function withOption(Option $option): self
+    {
+        return $this->state(fn(array $attributes) => [
+            "option_id" => $option->id
+        ]);
     }
 }
