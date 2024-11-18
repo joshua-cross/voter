@@ -49,3 +49,11 @@ test('Gives a successful response for the poll results page', function () {
     get(route('results', $poll->id))
         ->assertOk();
 });
+
+test('Gives a successful response for the poll creation page if the user is logged in', function () {
+    $user = User::factory()->create();
+    Auth::user($user);
+
+    get(route('poll.create'))
+        ->assertOk();
+});

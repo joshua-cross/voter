@@ -4,6 +4,9 @@
     </x-slot:title>
     <div class="mx-auto mt-10 max-w-7xl px-2 sm:px-6 lg:px-8">
         <x-poll-details :poll="$poll"/>
+        <div class="mt-4">
+            <a href="{{ route("results", $poll->id) }}">View Results</a>
+        </div>
         <x-share-menu/>
         @auth
             <form class="border rounded-md border-gray-400 p-6 shadow-md bg-white mt-6"

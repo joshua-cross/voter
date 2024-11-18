@@ -13,7 +13,8 @@
                         </div>
                         <div class="w-5/6">
                             <div style="width: {{ ceil($option->percentageOfVotes()) }}%"
-                                 class="bg-chart-{{ $i + 1 }} min-w-16 inline-flex justify-end py-1 px-2 rounded-md">
+                                 data-result="{{ $i }}"
+                                 class="bg-chart-{{$i + 1}} min-w-16 inline-flex justify-end py-1 px-2 rounded-md">
                                 <span class="text-sm font-bold text-text">{{ $option->percentageOfVotes() }}%</span>
                             </div>
                         </div>

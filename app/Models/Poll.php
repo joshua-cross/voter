@@ -49,19 +49,12 @@ class Poll extends Model
 
     public function formattedExpiryDate(): string
     {
-        $carbon = new Carbon($this->expiry_date);
-        return $carbon->format('Y-m-d H:i:s');
+        return (new Carbon($this->expiry_date))->format('Y-m-d H:i:s');
     }
 
     public function responseCount(): int
     {
-        $options = $this->options;
-        $responseCount = 0;
-        foreach ($options as $option) {
-            $responses = $option->responses;
-            $responseCount = count($responses);
-        }
-        return $responseCount;
+        return $this->options->reduce(fn(?int $carry, Option $option) => $carry + count($option->responses), 0);
     }
 
     public function options(): HasMany
