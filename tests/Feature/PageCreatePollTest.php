@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use function Pest\Laravel\get;
 
 uses(RefreshDatabase::class);
 
-test('', function () {
-    $response = $this->get('/');
+it("Redirects if the user is not logged in", function () {
+    User::factory()->create();
 
-    $response->assertStatus(200);
+    get(route("poll.create"))
+        ->assertStatus(302);
 });
