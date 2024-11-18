@@ -55,13 +55,7 @@ class Poll extends Model
 
     public function responseCount(): int
     {
-        $options = $this->options;
-        $responseCount = 0;
-        foreach ($options as $option) {
-            $responses = $option->responses;
-            $responseCount = count($responses);
-        }
-        return $responseCount;
+        return $this->options->reduce(fn(?int $carry, Option $option) => $carry + count($option->responses), 0);
     }
 
     public function options(): HasMany
